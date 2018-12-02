@@ -5,15 +5,15 @@
   <mat-card *ngFor="let shop of shops" class="shop-card">
     <mat-card-header>
       <div mat-card-avatar class="shop-header-image"></div>
-      <mat-card-title>{{shop.shop_name}}</mat-card-title>
-      <mat-card-subtitle>{{shop.id}}</mat-card-subtitle>
+      <mat-card-title> 
+        {{shop.shop_name}}
+      </mat-card-title>
+      <mat-card-subtitle>Id: {{shop.id}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of Shop">
+    <img mat-card-image routerLink="/shops/{{shop.id}}/products" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of Shop">
     <mat-card-content>
       <p>
-        {{shop.shop_name}}
-        <br>
-        Requests: {{shops.requests}}
+        Requests: {{shop.requests}}
       </p>
     </mat-card-content>
     <mat-card-actions>

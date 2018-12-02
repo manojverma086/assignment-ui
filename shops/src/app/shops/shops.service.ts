@@ -2,21 +2,22 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { Shop } from './shop';
 
 
 @Injectable()
 export class ShopService {
   constructor( private http: HttpClient) { }
-  private api_url = 'localhost:8000/api/shops/';
+  private api_url = environment.api_url + 'shops';
 
   getAll (): Observable<any> {
     const httpOptions = {
       // withCredentials: true,
       headers: new HttpHeaders(
         {
-        'content-type': 'application-json',
-        'accept': 'application-json',
+        'content-type': 'application/json',
+        'accept': 'application/json',
         'cache-control': 'no-cache'
         })
     };
@@ -33,8 +34,8 @@ export class ShopService {
         // withCredentials: true,
         headers: new HttpHeaders(
           {
-          'content-type': 'application-json',
-          'accept': 'application-json',
+          'content-type': 'application/json',
+          'accept': 'application/json',
           'cache-control': 'no-cache'
           })
       };
@@ -50,8 +51,8 @@ export class ShopService {
         // withCredentials: true,
         headers: new HttpHeaders(
           {
-          'content-type': 'application-json',
-          'accept': 'application-json',
+          'content-type': 'application/json',
+          'accept': 'application/json',
           'cache-control': 'no-cache'
           })
       };
@@ -67,8 +68,8 @@ export class ShopService {
         // withCredentials: true,
         headers: new HttpHeaders(
           {
-          'content-type': 'application-json',
-          'accept': 'application-json',
+          'content-type': 'application/json',
+          'accept': 'application/json',
           'cache-control': 'no-cache'
           })
       };
