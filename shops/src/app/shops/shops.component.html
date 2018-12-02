@@ -1,0 +1,34 @@
+<div>
+  <div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <mat-card *ngFor="let shop of shops" class="shop-card">
+    <mat-card-header>
+      <div mat-card-avatar class="shop-header-image"></div>
+      <mat-card-title>{{shop.shop_name}}</mat-card-title>
+      <mat-card-subtitle>{{shop.id}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of Shop">
+    <mat-card-content>
+      <p>
+        {{shop.shop_name}}
+        <br>
+        Requests: {{shops.requests}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="delete" title="delete shop"
+        (click)="delete(shop)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div>
+    <h2>Add new shop</h2>
+    <label>Shop name:
+      <input #shopName />
+    </label>
+    <button (click)="create(shopName.value); shopName.value=''">
+      add
+    </button>
+  </div>
+</div>
