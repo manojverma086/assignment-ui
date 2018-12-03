@@ -24,7 +24,6 @@ export class ShopsComponent implements OnInit {
     });
   }
   getById(id): void {
-
     this.isLoadingResults = true;
       this.shopService.getById(id)
     .subscribe(shop => {

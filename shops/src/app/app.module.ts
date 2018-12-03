@@ -30,7 +30,7 @@ import {
   MatDatepickerModule,
 } from '@angular/material';
 import { ShopService } from './shops/shops.service';
-
+import { ProductService } from './products/products.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShopsComponent } from './shops/shops.component';
@@ -74,7 +74,7 @@ import { ProductsComponent } from './products/products.component';
     MatDialogModule,
     MatDatepickerModule,
   ],
-  providers: [ShopService],
+  providers: [ShopService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
