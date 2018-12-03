@@ -1,4 +1,5 @@
 <div>
+  <h2>Here are some shops you can explore</h2>
   <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
@@ -10,7 +11,7 @@
       </mat-card-title>
       <mat-card-subtitle>Id: {{shop.id}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image routerLink="/shops/{{shop.id}}/products" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of Shop">
+    <img mat-card-image routerLink="/shops/{{shop.id}}/products" src="/assets/shop-icon.jpg" alt="Photo of Shop">
     <mat-card-content>
       <p>
         Requests: {{shop.requests}}

@@ -56,7 +56,7 @@ export class ProductService {
           'cache-control': 'no-cache'
           })
       };
-      const url = `${this.api_url}${shopId}/products`;
+      const url = `${this.api_url}/${shopId}/products`;
       return this.http.post<any>(url, product, httpOptions)
         .pipe(
           tap(result => this.log(`created shop`)),

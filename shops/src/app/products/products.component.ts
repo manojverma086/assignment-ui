@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material';
 import { Product } from './product';
+import {Shop} from './../shops/shop';
+import {ShopService } from './../shops/shops.service';
 import { ProductService } from './products.service';
 @Component({
   selector: 'app-products',
@@ -12,53 +14,57 @@ import { ProductService } from './products.service';
 export class ProductsComponent implements OnInit {
 
   products;
-  product: Product = null;
+  product: Product = new Product('', '', '', '');
   isLoadingResults = false;
+  shop: Shop = new Shop('', '', '');
 
-  displayedColumns: string[] = ['id', 'category', 'product', 'discount', 'price'];
+  displayedColumns: string[] = ['id', 'category', 'product', 'discount', 'price', 'oprice'];
   dataSource = new MatTableDataSource();
   constructor(
     private productService: ProductService,
+    private shopService: ShopService,
     private route: ActivatedRoute,
     private router: Router,
     private changeDetectorRefs: ChangeDetectorRef
     ) { }
 
   ngOnInit() {
-  //   this.products = this.route.paramMap.pipe(
-  //   switchMap((params: ParamMap) =>
-  //   this.productService.getAll(params.get('shopId'))
-  // ));
-  this.getAll(2);
+    const shopId = +this.route.snapshot.paramMap.get('shopid');
+    this.shopService.getById(shopId)
+    .subscribe(shop => {
+      this.shop = shop;
+      this.getAll();
+    });
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  getAll(shopId): void {
+  getAll(): void {
     this.isLoadingResults = true;
-      this.productService.getAll(shopId)
+      this.productService.getAll(this.shop.id)
     .subscribe(products => {
       this.products = products;
       this.dataSource.data = products;
+      this.dataSource.data.map(obj => (obj.oprice = (obj.price * 100 / (100 - obj.discount)).toFixed(0)));
       this.isLoadingResults = false;
     });
   }
-  create(shopId, product): void {
+  create(product): void {
     this.isLoadingResults = true;
-      this.productService.create(shopId, product)
+      this.productService.create(this.shop.id, product)
     .subscribe(response => {
       console.log('product created', response);
-      this.getAll(shopId);
+      this.getAll();
       this.isLoadingResults = false;
     });
   }
-  delete(shopId, product): void {
+  delete(product): void {
     this.isLoadingResults = true;
-      this.productService.delete(shopId, product)
+      this.productService.delete(this.shop.id, product)
     .subscribe(response => {
       console.log('product deleted');
-      this.getAll(shopId);
+      this.getAll();
       this.isLoadingResults = false;
     });
   }

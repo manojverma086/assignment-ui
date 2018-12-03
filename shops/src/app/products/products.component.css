@@ -1,8 +1,26 @@
+.products-table{
+  width: 50%;
+  display: inline-block;
+}
+
 table {
-    width: 50%;
+    width: 100%;
   }
   
   .mat-form-field {
     font-size: 14px;
     width: 100%;
+  }
+
+  .product-form{
+    display: inline-block;
+    width: 45%;
+    margin-left:2%;
+  }
+  .product-create-container {
+      display: flex;
+      flex-direction: column;
+  }
+  .product-create-container > * {
+    width: 80%;
   }

@@ -1,45 +1,84 @@
 <div>
   <h2>
-
+    Products of {{shop.shop_name}}
   </h2>
-
-  <mat-form-field>
-     Filter <input matInput (keyup)="applyFilter($event.target.value)" >
-    </mat-form-field>
-    
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
-      <!-- Id Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
-    
-      <!-- Category Column -->
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef> Category </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-      </ng-container>
-    
-      <!-- Product Column -->
-      <ng-container matColumnDef="product">
-        <th mat-header-cell *matHeaderCellDef> Product </th>
-        <td mat-cell *matCellDef="let element"> {{element.product}} </td>
-      </ng-container>
-    
-      <!-- Discount Column -->
-      <ng-container matColumnDef="discount">
-        <th mat-header-cell *matHeaderCellDef> Discount </th>
-        <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
-      </ng-container>
-      <!-- Price Column -->
-      <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-        </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+  <h3>Requests on this shop {{shop.requests}}</h3>
+  <div class="product-form">
+    <h2>Create new product</h2>
+      <div class="product-create-container">
+          <mat-form-field>
+              <mat-select [(ngModel)]="product.category" placeholder="Category">
+                <mat-option value="fruit">Fruit</mat-option>
+                <mat-option value="veg">Veg</mat-option>
+                <mat-option value="cloth">Cloth</mat-option>
+              </mat-select>
+            </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="product.product" placeholder="Name">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput [(ngModel)]="product.price" placeholder="Price">
+            </mat-form-field>
+          <mat-form-field>
+            <mat-select [(ngModel)]="product.discount" placeholder="Discount">
+              <mat-option value="10">10</mat-option>
+              <mat-option value="20">20</mat-option>
+              <mat-option value="30">30</mat-option>
+              <mat-option value="40">40</mat-option>
+              <mat-option value="50">50</mat-option>
+              <mat-option value="60">60</mat-option>
+              <mat-option value="70">70</mat-option>
+              <mat-option value="80">80</mat-option>
+              <mat-option value="90">90</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button (click)="create(product)" color="primary">Save</button>
+        </div>
+  </div>
+  <div class="products-table">
+      <mat-form-field>
+          Filter <input matInput (keyup)="applyFilter($event.target.value)" >
+         </mat-form-field>
+         
+         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+         
+           <!-- Id Column -->
+           <ng-container matColumnDef="id">
+             <th mat-header-cell *matHeaderCellDef> Id </th>
+             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+           </ng-container>
+         
+           <!-- Category Column -->
+           <ng-container matColumnDef="category">
+             <th mat-header-cell *matHeaderCellDef> Category Name</th>
+             <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+           </ng-container>
+         
+           <!-- Product Column -->
+           <ng-container matColumnDef="product">
+             <th mat-header-cell *matHeaderCellDef> Product Name</th>
+             <td mat-cell *matCellDef="let element"> {{element.product}} </td>
+           </ng-container>
+         
+           <!-- Discount Column -->
+           <ng-container matColumnDef="discount">
+             <th mat-header-cell *matHeaderCellDef> Discount in Precentage</th>
+             <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
+           </ng-container>
+           <!-- Price Column -->
+           <ng-container matColumnDef="price">
+               <th mat-header-cell *matHeaderCellDef>Offered Price </th>
+               <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+             </ng-container>
+             <ng-container matColumnDef="oprice">
+                 <th mat-header-cell *matHeaderCellDef>Original Price </th>
+                 <td mat-cell *matCellDef="let element"> {{element.oprice}} </td>
+               </ng-container>
+           
+           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
+         <span *ngIf="dataSource.data.length ==0"> No products available, create products</span>
+  </div>
 </div>
 
